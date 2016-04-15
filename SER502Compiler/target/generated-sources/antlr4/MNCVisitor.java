@@ -105,4 +105,16 @@ public interface MNCVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFuncdeclaration(MNCParser.FuncdeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#num}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNum(MNCParser.NumContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#boolt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolt(MNCParser.BooltContext ctx);
 }

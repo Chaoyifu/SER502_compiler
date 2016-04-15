@@ -202,6 +202,30 @@ public class MNCBaseListener implements MNCListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFuncdeclaration(MNCParser.FuncdeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNum(MNCParser.NumContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNum(MNCParser.NumContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBoolt(MNCParser.BooltContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoolt(MNCParser.BooltContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

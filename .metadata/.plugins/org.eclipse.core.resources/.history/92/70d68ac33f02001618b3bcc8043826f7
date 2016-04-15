@@ -1,0 +1,197 @@
+import org.antlr.v4.runtime.tree.ParseTree;
+
+public class visitor2intermediateCode extends MNCBaseVisitor<String>{
+
+//	@Override
+//	public String visit(ParseTree arg0) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public String visitChildren(RuleNode arg0) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public String visitErrorNode(ErrorNode arg0) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public String visitTerminal(TerminalNode arg0) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	@Override
+	public String visitProgram(MNCParser.ProgramContext ctx) {
+		// TODO Auto-generated method stub
+		System.out.println("\nin program");
+		if (ctx.body()!= null){
+			visit(ctx.body());
+		}
+//		System.out.println(ctx.body().toString());
+		return "";
+	}
+
+	@Override
+	public String visitBody(MNCParser.BodyContext ctx) {
+		// TODO Auto-generated method stub
+		System.out.println("\nin body");
+		if (ctx.statements()!= null){
+			visit(ctx.statements());
+		}
+		return null;
+	}
+
+	@Override
+	public String visitStatements(MNCParser.StatementsContext ctx) {
+		// TODO Auto-generated method stub
+		System.out.println("\nin statements");
+		for (int i=0;i<ctx.statement().size();i++){
+			System.out.println("in for"+ ctx.statement(i).toString());
+			if (ctx.statement(i).arithmetic()!=null){
+				visit(ctx.statement(i).arithmetic());
+			}
+			if (ctx.statement(i).assignment()!=null){
+				visit(ctx.statement(i).assignment());
+			}
+			if (ctx.statement(i).arithmetic()!=null){
+				visit(ctx.statement(i).arithmetic());
+			}
+			if (ctx.statement(i).arithmetic()!=null){
+				visit(ctx.statement(i).arithmetic());
+			}
+			if (ctx.statement(i).arithmetic()!=null){
+				visit(ctx.statement(i).arithmetic());
+			}
+			if (ctx.statement(i).arithmetic()!=null){
+				visit(ctx.statement(i).arithmetic());
+			}
+			if (ctx.statement(i).arithmetic()!=null){
+				visit(ctx.statement(i).arithmetic());
+			}
+			
+		}
+//		if (ctx.statement()== ctx.statement().toString()){
+//			visit(ctx.statement());
+//		}
+		return null;
+	}
+
+	@Override
+	public String visitStatement(MNCParser.StatementContext ctx) {
+		// TODO Auto-generated method stub
+		System.out.println("\nin statement");
+		if (ctx.arithmetic()!= null){
+			visit(ctx.arithmetic());
+		}
+		if (ctx.assignment()!= null){
+			visit(ctx.assignment());
+		}
+		if (ctx.functioncall()!= null){
+			visit(ctx.functioncall());
+		}
+		if (ctx.funcdeclaration()!= null){
+			visit(ctx.funcdeclaration());
+		}
+		if (ctx.conditional()!= null){
+			visit(ctx.conditional());
+		}
+		if (ctx.loop()!= null){
+			visit(ctx.loop());
+		}
+		return null;
+	}
+
+	@Override
+	public String visitArithmetic(MNCParser.ArithmeticContext ctx) {
+		// TODO Auto-generated method stub
+		System.out.println("\nin arithmetic");
+		if (ctx.type()!= null){
+			visit(ctx.type());
+		}
+		return null;
+	}
+
+	@Override
+	public String visitType(MNCParser.TypeContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitBool(MNCParser.BoolContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitAssignment(MNCParser.AssignmentContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitExpr(MNCParser.ExprContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitFactor(MNCParser.FactorContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitNumber(MNCParser.NumberContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitFunctioncall(MNCParser.FunctioncallContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitConditional(MNCParser.ConditionalContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitBoolcheck(MNCParser.BoolcheckContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitLoop(MNCParser.LoopContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitFuncdeclaration(MNCParser.FuncdeclarationContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitNum(MNCParser.NumContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitBoolt(MNCParser.BooltContext ctx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

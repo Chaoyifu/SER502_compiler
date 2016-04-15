@@ -166,4 +166,24 @@ public interface MNCListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFuncdeclaration(MNCParser.FuncdeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void enterNum(MNCParser.NumContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#num}.
+	 * @param ctx the parse tree
+	 */
+	void exitNum(MNCParser.NumContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#boolt}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolt(MNCParser.BooltContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#boolt}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolt(MNCParser.BooltContext ctx);
 }

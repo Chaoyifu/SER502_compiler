@@ -4,17 +4,17 @@
 grammar MNC;
 WS : [ \t\r]+ -> skip ; // skip spaces, tabs, newlines
 
-program : (MAIN)(EOD)body;
+program : MAIN EOD body;
 
-body : START (EOD)statements(END);
+body : START (EOD)+ statements END (EOD)*;
 
-statements : ((statement) EOD)*;
+statements : (statement EOD)*|('\n')*;
 
-statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration;
+statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration|(EOD)*;
 
-arithmetic : type ':' (IDENTIFIER);
+arithmetic : type ':' IDENTIFIER;
 
-type : NUM|BOOL;
+type : (num) | (boolt);
 
 bool : TRUE | FALSE;
 
@@ -46,7 +46,7 @@ PROGRAMEND : 'mainEnd';
 
 IDENTIFIER : ([a-z]|[A-Z]|'_')([a-z]|[A-Z]|'_'|[0-9])*;
 
-EOD : [\n]+;
+EOD : '\n';
 
 EQUALS : '=';
 
@@ -54,9 +54,9 @@ SIGN : '+'|'-';
 
 DIGIT : [0-9];
 
-NUM : 'number';
+num : 'number';
 
-BOOL : 'bool';
+boolt : 'boolean';
 
 TRUE : 'true';
 

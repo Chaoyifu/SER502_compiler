@@ -1,5 +1,5 @@
-antlr4.antlrRegisteredTools=4.4@C\:\\Users\\Manohara\\AppData\\Local\\Temp\\antlr-4.4-complete.jar\:null@C\:\\Users\\Manohara\\Downloads\\antlr-4.5.3-complete.jar
-antlr4.antlrToolPath=C\:\\Users\\Manohara\\Downloads\\antlr-4.5.3-complete.jar
+antlr4.antlrRegisteredTools=4.4@/var/folders/xm/xk5l6btx0n733p9tbx2f0b980000gn/T/antlr-4.4-complete.jar\:null@/Users/nitingoel/Desktop/ser502/SER502_compiler/SER502Compiler/lib/antlr-4.5.3-complete.jar
+antlr4.antlrToolPath=/Users/nitingoel/Desktop/ser502/SER502_compiler/SER502Compiler/lib/antlr-4.5.3-complete.jar
 antlr4.encoding=UTF-8
 antlr4.listener=true
 antlr4.visitor=true
