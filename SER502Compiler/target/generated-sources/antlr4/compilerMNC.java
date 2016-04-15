@@ -7,9 +7,10 @@ public class compilerMNC {
 		// TODO Auto-generated method stub
 		String inputstr = "main \n" +
 							"start \n" +
-							"number: a \n" +
+//							"number: a \n" +
 //							"boolean: _bcd \n" +
-							"a = 10 \n"+
+//							"a = 10 \n"+
+//							"a = 10 + 20 + 30 * 100 / 50 \n"+
 							"end  \n \n";
 		ANTLRInputStream input = new ANTLRInputStream(inputstr);
 		MNCLexer lexer = new MNCLexer(input);
@@ -18,7 +19,7 @@ public class compilerMNC {
 		MNCParser parser = new MNCParser(tokens);
         ParseTree tree = parser.program(); // begin parsing at rule 'r'
         System.out.println(tree.toStringTree(parser)); 
-        visitor2intermediateCode visitor = new visitor2intermediateCode();
+        visitor2intermediateCode visitor = new visitor2intermediateCode(tokens);
         String res = visitor.visit(tree);
         System.out.println(res);
 	}

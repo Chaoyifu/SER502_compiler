@@ -64,6 +64,12 @@ public interface MNCVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpr(MNCParser.ExprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MNCParser#term}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTerm(MNCParser.TermContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MNCParser#factor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -105,6 +111,12 @@ public interface MNCVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFuncdeclaration(MNCParser.FuncdeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#sign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSign(MNCParser.SignContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MNCParser#num}.
 	 * @param ctx the parse tree

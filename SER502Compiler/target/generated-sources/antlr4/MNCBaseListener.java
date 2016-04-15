@@ -123,6 +123,18 @@ public class MNCBaseListener implements MNCListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTerm(MNCParser.TermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTerm(MNCParser.TermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFactor(MNCParser.FactorContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -202,6 +214,18 @@ public class MNCBaseListener implements MNCListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFuncdeclaration(MNCParser.FuncdeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSign(MNCParser.SignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSign(MNCParser.SignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

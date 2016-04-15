@@ -97,6 +97,16 @@ public interface MNCListener extends ParseTreeListener {
 	 */
 	void exitExpr(MNCParser.ExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MNCParser#term}.
+	 * @param ctx the parse tree
+	 */
+	void enterTerm(MNCParser.TermContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#term}.
+	 * @param ctx the parse tree
+	 */
+	void exitTerm(MNCParser.TermContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MNCParser#factor}.
 	 * @param ctx the parse tree
 	 */
@@ -166,6 +176,16 @@ public interface MNCListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFuncdeclaration(MNCParser.FuncdeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#sign}.
+	 * @param ctx the parse tree
+	 */
+	void enterSign(MNCParser.SignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#sign}.
+	 * @param ctx the parse tree
+	 */
+	void exitSign(MNCParser.SignContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MNCParser#num}.
 	 * @param ctx the parse tree

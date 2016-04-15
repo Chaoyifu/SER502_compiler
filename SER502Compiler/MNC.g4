@@ -20,11 +20,13 @@ bool : TRUE | FALSE;
 
 assignment : IDENTIFIER EQUALS expr;
 
-expr : expr ADD expr|expr MUL expr|factor;
+expr : term ((ADD|SUB) term)*;
+
+term : factor ((MUL|DIV) factor)*;
 
 factor : IDENTIFIER|number;
 
-number : (SIGN)(DIGIT)+|(DIGIT)+;
+number : (DIGIT)+|OPENPAR ((sign) (DIGIT)+) CLOSEPAR;
 
 functioncall : IDENTIFIER OPENPAR(IDENTIFIER((SEPERATOR)IDENTIFIER)*)*CLOSEPAR(EOD);
 
@@ -50,7 +52,7 @@ EOD : '\n';
 
 EQUALS : '=';
 
-SIGN : '+'|'-';
+sign : '+'|'-';
 
 DIGIT : [0-9];
 
@@ -64,9 +66,13 @@ FALSE : 'false';
 
 CONDITIONS : '=='|'!='|'<='|'>='|'<'|'>';
 
-ADD : '+'|'-';
+ADD : '+';
 
-MUL : '*'|'/';
+SUB : '-';
+
+MUL : '*';
+
+DIV : '/';
 
 OPENPAR : '(';
 
