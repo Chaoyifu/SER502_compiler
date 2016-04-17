@@ -10,7 +10,7 @@ body : START (EOD)+ statements END (EOD)*;
 
 statements : (statement EOD)*|(EOD)*;
 
-statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration;
+statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration|printcall;
 
 arithmetic : type ':' IDENTIFIER;
 
@@ -18,7 +18,7 @@ type : (NUM) | (BOOLT);
 
 bool : TRUE | FALSE;
 
-assignment : IDENTIFIER EQUALS expr;
+assignment : IDENTIFIER EQUALS expr | IDENTIFIER EQUALS READ;
 
 expr : term ((ADD|SUB) term)*;
 
@@ -33,6 +33,8 @@ conditional : IF OPENPAR(boolcheck|bool)CLOSEPAR(EOD body)(ELSE(EOD body))?;
 loop : LOOP OPENPAR(IDENTIFIER|number)CLOSEPAR TO OPENPAR(IDENTIFIER|number)CLOSEPAR WITH number EOD body;
 
 funcdeclaration : FUNCTION IDENTIFIER OPENPAR(IN(IDENTIFIER)* OUT(IDENTIFIER)*) CLOSEPAR body;
+
+printcall : PRINT (IDENTIFIER|expr|boolcheck|number);
 
 functioncall : IDENTIFIER OPENPAR(IDENTIFIER((SEPERATOR)IDENTIFIER)*)*CLOSEPAR;
 
@@ -67,6 +69,10 @@ FUNCTION : 'function:';
 IN : 'in:';
 
 OUT : 'out:';
+
+PRINT : 'print:';
+
+READ : 'readInput';
 
 EOD : '\n';
 
