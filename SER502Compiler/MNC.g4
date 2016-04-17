@@ -4,17 +4,17 @@
 grammar MNC;
 WS : [ \t\r]+ -> skip ; // skip spaces, tabs, newlines
 
-program : MAIN EOD body;
+program : MAIN EOD body END;
 
 body : START (EOD)+ statements END (EOD)*;
 
-statements : (statement EOD)*|('\n')*;
+statements : (statement EOD)*|(EOD)*;
 
-statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration|(EOD)*;
+statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration;
 
 arithmetic : type ':' IDENTIFIER;
 
-type : (num) | (boolt);
+type : (NUM) | (BOOLT);
 
 bool : TRUE | FALSE;
 
@@ -26,17 +26,17 @@ term : factor ((MUL|DIV) factor)*;
 
 factor : IDENTIFIER|number;
 
-number : (DIGIT)+|OPENPAR ((sign) (DIGIT)+) CLOSEPAR;
+number : (DIGIT)+|OPENPAR (SIGN) CLOSEPAR (DIGIT)+ ;
 
-functioncall : IDENTIFIER OPENPAR(IDENTIFIER((SEPERATOR)IDENTIFIER)*)*CLOSEPAR(EOD);
+conditional : IF OPENPAR(boolcheck|bool)CLOSEPAR(EOD body)(ELSE(EOD body))?;
 
-conditional : IF OPENPAR(boolcheck|bool)CLOSEPAR(body)(ELSE(body))?;
+loop : LOOP OPENPAR(IDENTIFIER|number)CLOSEPAR TO OPENPAR(IDENTIFIER|number)CLOSEPAR WITH number EOD body;
+
+funcdeclaration : FUNCTION IDENTIFIER OPENPAR(IN(IDENTIFIER)* OUT(IDENTIFIER)*) CLOSEPAR body;
+
+functioncall : IDENTIFIER OPENPAR(IDENTIFIER((SEPERATOR)IDENTIFIER)*)*CLOSEPAR;
 
 boolcheck : expr CONDITIONS expr; 
-
-loop : LOOP OPENPAR(IDENTIFIER|DIGIT)CLOSEPAR TO OPENPAR(IDENTIFIER|DIGIT)CLOSEPAR WITH DIGIT body;
-
-funcdeclaration : FUNCTION IDENTIFIER OPENPAR(IN(IDENTIFIER)* OUT(IDENTIFIER)*)body;
 
 MAIN : 'main';
 
@@ -44,25 +44,37 @@ START : 'start';
 
 END : 'end';
 
-PROGRAMEND : 'mainEnd';
+NUM : 'number';
 
-IDENTIFIER : ([a-z]|[A-Z]|'_')([a-z]|[A-Z]|'_'|[0-9])*;
+BOOLT : 'boolean';
+
+TRUE : 'true';
+
+FALSE : 'false';
+
+IF : 'if';
+
+ELSE : 'else';
+
+LOOP : 'loop:';
+
+TO : 'to';
+
+WITH : 'with';
+
+FUNCTION : 'function:';
+
+IN : 'in:';
+
+OUT : 'out:';
 
 EOD : '\n';
 
 EQUALS : '=';
 
-sign : '+'|'-';
+SIGN : '(+)'|'(-)';
 
 DIGIT : [0-9];
-
-num : 'number';
-
-boolt : 'boolean';
-
-TRUE : 'true';
-
-FALSE : 'false';
 
 CONDITIONS : '=='|'!='|'<='|'>='|'<'|'>';
 
@@ -80,18 +92,4 @@ CLOSEPAR : ')';
 
 SEPERATOR : ',';
 
-IF : 'if';
-
-ELSE : 'else';
-
-LOOP : 'loop:';
-
-TO : 'to';
-
-WITH : 'with';
-
-FUNCTION : 'function:';
-
-IN : 'in:';
-
-OUT : 'out:';
+IDENTIFIER : ([a-z]|[A-Z]|'_')([a-z]|[A-Z]|'_'|[0-9])*;
