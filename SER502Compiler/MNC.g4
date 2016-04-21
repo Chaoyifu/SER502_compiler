@@ -14,7 +14,7 @@ statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration|
 
 arithmetic : type ':' IDENTIFIER;
 
-type : (NUM) | (BOOLT);
+type : NUM | BOOLT;
 
 bool : TRUE | FALSE;
 
@@ -26,19 +26,25 @@ term : factor ((MUL|DIV) factor)*;
 
 factor : IDENTIFIER|number;
 
-number : (DIGIT)+|OPENPAR (SIGN) CLOSEPAR (DIGIT)+ ;
+number : (DIGIT)+|(sign)(DIGIT)+ ;
 
 conditional : IF OPENPAR(boolcheck|bool)CLOSEPAR(EOD body)(ELSE(EOD body))?;
 
 loop : LOOP OPENPAR(IDENTIFIER|number)CLOSEPAR TO OPENPAR(IDENTIFIER|number)CLOSEPAR WITH number EOD body;
 
-funcdeclaration : FUNCTION IDENTIFIER OPENPAR(IN(IDENTIFIER)* OUT(IDENTIFIER)*) CLOSEPAR body;
+funcdeclaration : FUNCTION IDENTIFIER OPENPAR((instatement)* (outstatement)?) CLOSEPAR EOD body;
 
-printcall : PRINT (IDENTIFIER|expr|boolcheck|number);
+instatement : IN type IDENTIFIER;
+
+outstatement : OUT type IDENTIFIER;
+
+printcall : PRINT (IDENTIFIER|bool|number);
 
 functioncall : IDENTIFIER OPENPAR(IDENTIFIER((SEPERATOR)IDENTIFIER)*)*CLOSEPAR;
 
 boolcheck : expr CONDITIONS expr; 
+
+sign : OPENPAR ADD CLOSEPAR | OPENPAR SUB CLOSEPAR;
 
 MAIN : 'main';
 
@@ -77,8 +83,6 @@ READ : 'readInput';
 EOD : '\n';
 
 EQUALS : '=';
-
-SIGN : '(+)'|'(-)';
 
 DIGIT : [0-9];
 
