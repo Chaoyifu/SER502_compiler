@@ -2,7 +2,7 @@
  * Define a grammar called Hello
  */
 grammar MNC;
-WS : [ \t\r]+ -> skip ; // skip spaces, tabs, newlines
+WS : [\t\r]+ -> skip ; // skip spaces, tabs, newlines
 
 program : MAIN EOD body END;
 
@@ -12,25 +12,31 @@ statements : (statement EOD)*|(EOD)*;
 
 statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration|printcall;
 
-arithmetic : type ':' IDENTIFIER;
+arithmetic : type COLON var;
+
+var : IDENTIFIER | array;
+
+array : IDENTIFIER ARRAYOPEN (DIGIT)+ ARRAYCLOSE;
 
 type : NUM | BOOLT;
 
 bool : TRUE | FALSE;
 
-assignment : IDENTIFIER EQUALS expr | IDENTIFIER EQUALS READ;
+assignment : var EQUALS expr | var EQUALS READ;
 
-expr : term ((ADD|SUB) term)*;
+expr : term | (term (ADD|SUB) expr);
 
-term : factor ((MUL|DIV) factor)*;
+term : factor | (factor (MUL|DIV) term);
 
-factor : IDENTIFIER|number;
+factor : element | OPENPAR expr CLOSEPAR;
+
+element : var|number|bool;
 
 number : (DIGIT)+|(sign)(DIGIT)+ ;
 
-conditional : IF OPENPAR(boolcheck|bool)CLOSEPAR(EOD body)(ELSE(EOD body))?;
+conditional : IF OPENPAR(boolcheck|var)CLOSEPAR(EOD body)(ELSE(EOD body))?;
 
-loop : LOOP OPENPAR(IDENTIFIER|number)CLOSEPAR TO OPENPAR(IDENTIFIER|number)CLOSEPAR WITH number EOD body;
+loop : LOOP OPENPAR(var|number)CLOSEPAR TO OPENPAR(var|number)CLOSEPAR WITH number EOD body;
 
 funcdeclaration : FUNCTION IDENTIFIER OPENPAR((instatement)* (outstatement)?) CLOSEPAR EOD body;
 
@@ -38,9 +44,9 @@ instatement : IN type IDENTIFIER;
 
 outstatement : OUT type IDENTIFIER;
 
-printcall : PRINT (IDENTIFIER|bool|number);
+printcall : PRINT (var|bool|number);
 
-functioncall : IDENTIFIER OPENPAR(IDENTIFIER((SEPERATOR)IDENTIFIER)*)*CLOSEPAR;
+functioncall : IDENTIFIER OPENPAR(var((SEPERATOR)var)*)*CLOSEPAR;
 
 boolcheck : expr CONDITIONS expr; 
 
@@ -100,6 +106,12 @@ OPENPAR : '(';
 
 CLOSEPAR : ')';
 
+ARRAYOPEN : '[';
+
+ARRAYCLOSE : ']';
+
 SEPERATOR : ',';
+
+COLON : ':';
 
 IDENTIFIER : ([a-z]|[A-Z]|'_')([a-z]|[A-Z]|'_'|[0-9])*;
