@@ -40,6 +40,18 @@ public interface MNCVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArithmetic(MNCParser.ArithmeticContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MNCParser#var}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVar(MNCParser.VarContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#array}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArray(MNCParser.ArrayContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MNCParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -76,29 +88,23 @@ public interface MNCVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFactor(MNCParser.FactorContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MNCParser#element}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElement(MNCParser.ElementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MNCParser#number}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitNumber(MNCParser.NumberContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MNCParser#functioncall}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunctioncall(MNCParser.FunctioncallContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MNCParser#conditional}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitConditional(MNCParser.ConditionalContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MNCParser#boolcheck}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolcheck(MNCParser.BoolcheckContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MNCParser#loop}.
 	 * @param ctx the parse tree
@@ -112,21 +118,39 @@ public interface MNCVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFuncdeclaration(MNCParser.FuncdeclarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MNCParser#instatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstatement(MNCParser.InstatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#outstatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutstatement(MNCParser.OutstatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#printcall}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintcall(MNCParser.PrintcallContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#functioncall}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctioncall(MNCParser.FunctioncallContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MNCParser#boolcheck}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolcheck(MNCParser.BoolcheckContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MNCParser#sign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSign(MNCParser.SignContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MNCParser#num}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNum(MNCParser.NumContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link MNCParser#boolt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBoolt(MNCParser.BooltContext ctx);
 }

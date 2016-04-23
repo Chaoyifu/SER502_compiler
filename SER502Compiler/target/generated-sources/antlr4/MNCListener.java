@@ -57,6 +57,26 @@ public interface MNCListener extends ParseTreeListener {
 	 */
 	void exitArithmetic(MNCParser.ArithmeticContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MNCParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void enterVar(MNCParser.VarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#var}.
+	 * @param ctx the parse tree
+	 */
+	void exitVar(MNCParser.VarContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray(MNCParser.ArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#array}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray(MNCParser.ArrayContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MNCParser#type}.
 	 * @param ctx the parse tree
 	 */
@@ -117,6 +137,16 @@ public interface MNCListener extends ParseTreeListener {
 	 */
 	void exitFactor(MNCParser.FactorContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MNCParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void enterElement(MNCParser.ElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void exitElement(MNCParser.ElementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MNCParser#number}.
 	 * @param ctx the parse tree
 	 */
@@ -127,16 +157,6 @@ public interface MNCListener extends ParseTreeListener {
 	 */
 	void exitNumber(MNCParser.NumberContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MNCParser#functioncall}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctioncall(MNCParser.FunctioncallContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MNCParser#functioncall}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctioncall(MNCParser.FunctioncallContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MNCParser#conditional}.
 	 * @param ctx the parse tree
 	 */
@@ -146,16 +166,6 @@ public interface MNCListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConditional(MNCParser.ConditionalContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MNCParser#boolcheck}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolcheck(MNCParser.BoolcheckContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MNCParser#boolcheck}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolcheck(MNCParser.BoolcheckContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MNCParser#loop}.
 	 * @param ctx the parse tree
@@ -177,6 +187,56 @@ public interface MNCListener extends ParseTreeListener {
 	 */
 	void exitFuncdeclaration(MNCParser.FuncdeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MNCParser#instatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstatement(MNCParser.InstatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#instatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstatement(MNCParser.InstatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#outstatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterOutstatement(MNCParser.OutstatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#outstatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitOutstatement(MNCParser.OutstatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#printcall}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintcall(MNCParser.PrintcallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#printcall}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintcall(MNCParser.PrintcallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#functioncall}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctioncall(MNCParser.FunctioncallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#functioncall}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctioncall(MNCParser.FunctioncallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MNCParser#boolcheck}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolcheck(MNCParser.BoolcheckContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#boolcheck}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolcheck(MNCParser.BoolcheckContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MNCParser#sign}.
 	 * @param ctx the parse tree
 	 */
@@ -186,24 +246,4 @@ public interface MNCListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSign(MNCParser.SignContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MNCParser#num}.
-	 * @param ctx the parse tree
-	 */
-	void enterNum(MNCParser.NumContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MNCParser#num}.
-	 * @param ctx the parse tree
-	 */
-	void exitNum(MNCParser.NumContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MNCParser#boolt}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolt(MNCParser.BooltContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MNCParser#boolt}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolt(MNCParser.BooltContext ctx);
 }

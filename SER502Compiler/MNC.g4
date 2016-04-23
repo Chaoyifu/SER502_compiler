@@ -4,13 +4,13 @@
 grammar MNC;
 WS : [\t\r]+ -> skip ; // skip spaces, tabs, newlines
 
-program : MAIN EOD body END;
+program : (funcdeclaration EOL)* MAIN EOL body EOL (funcdeclaration EOL)*;
 
-body : START (EOD)+ statements END (EOD)*;
+body : START (EOL)+ statements END (EOL)*;
 
-statements : (statement EOD)*|(EOD)*;
+statements : (statement EOL)*|(EOL)*;
 
-statement : arithmetic|assignment|functioncall|conditional|loop|funcdeclaration|printcall;
+statement : arithmetic|assignment|functioncall|conditional|loop|printcall;
 
 arithmetic : type COLON var;
 
@@ -34,11 +34,11 @@ element : var|number|bool;
 
 number : (DIGIT)+|(sign)(DIGIT)+ ;
 
-conditional : IF OPENPAR(boolcheck|var)CLOSEPAR(EOD body)(ELSE(EOD body))?;
+conditional : IF OPENPAR(boolcheck|var)CLOSEPAR(EOL body)(ELSE(EOL body))?;
 
-loop : LOOP OPENPAR(var|number)CLOSEPAR TO OPENPAR(var|number)CLOSEPAR WITH number EOD body;
+loop : LOOP OPENPAR(var|number)CLOSEPAR TO OPENPAR(var|number)CLOSEPAR WITH number EOL body;
 
-funcdeclaration : FUNCTION IDENTIFIER OPENPAR((instatement)* (outstatement)?) CLOSEPAR EOD body;
+funcdeclaration : FUNCTION IDENTIFIER OPENPAR((instatement)* (outstatement)?) CLOSEPAR EOL body;
 
 instatement : IN type IDENTIFIER;
 
@@ -46,7 +46,7 @@ outstatement : OUT type IDENTIFIER;
 
 printcall : PRINT (var|bool|number);
 
-functioncall : IDENTIFIER OPENPAR(var((SEPERATOR)var)*)*CLOSEPAR;
+functioncall : IDENTIFIER OPENPAR var?(SEPERATOR var)* CLOSEPAR;
 
 boolcheck : expr CONDITIONS expr; 
 
@@ -86,7 +86,7 @@ PRINT : 'print:';
 
 READ : 'readInput';
 
-EOD : '\n';
+EOL : '\n';
 
 EQUALS : '=';
 

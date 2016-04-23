@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="MNCParser.NumContext"/>
+<fullyQualifiedTypeName name="MNCParser.BooltContext"/>
+<fullyQualifiedTypeName name="MNCParser.ProgramContext"/>
+<fullyQualifiedTypeName name="MNCParser.BodyContext"/>
+<fullyQualifiedTypeName name="MNCBaseVisitor"/>
+<fullyQualifiedTypeName name="org.antlr.v4.runtime.tree.TerminalNode"/>
+<fullyQualifiedTypeName name="org.antlr.v4.runtime.CommonTokenStream"/>
+<fullyQualifiedTypeName name="MNCParser.TermContext"/>
+</qualifiedTypeNameHistroy>

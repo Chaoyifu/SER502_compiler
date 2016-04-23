@@ -1,8 +1,0 @@
-
-public class visitor2intermediateCode extends MNCBaseVisitor{
-
-	public void change2intermediate(){
-		
-//		System.out.println(visitArithmetic());
-	}
-}
