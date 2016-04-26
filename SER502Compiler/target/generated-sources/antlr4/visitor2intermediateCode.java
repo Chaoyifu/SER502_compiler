@@ -335,12 +335,12 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 		System.out.println(strCond);
 		visit(ctx.body(0));
 		if(ctx.ELSE()!=null){
-			System.out.println("JMP"+count +"ifelse");
+			System.out.println("JMP "+count +"ifel");
 			System.out.println("LBL "+count+"if");
-			visit(ctx.ELSE());
 			if(ctx.body(1)!=null){
 				visit(ctx.body(1));
 			}
+			System.out.println("LBL "+count+"ifel");
 		}
 		else{
 			System.out.println("LBL "+count+"if");
@@ -376,21 +376,27 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 	public String visitLoop(MNCParser.LoopContext ctx) {
 		int count=loop_count;
 		loop_count++;
-		System.out.println("LBL "+count+"loop");
 		String str="";
-		if((ctx.number().sign().getText())=="-"){
-			str+="JGE ";
+		if(ctx.number().sign()!=null){
+			if((ctx.number().sign().getText())=="-"){
+				str+="JLE ";
+			}
+			else{
+				str+="JGE ";
+			}
 		}
 		else{
-			str+="JLE ";
+			str+="JGE ";
 		}
 		String start = visit(ctx.looppar(0));
 		String end = visit(ctx.looppar(1));
-		str+=count+"loopEND "+start+" "+end;
+		System.out.println("LBL "+count+"loop");
+		str+=count+"lpEND "+start+" "+end;
+		System.out.println(str);
 		visit(ctx.body());
-		System.out.println("ADD "+start+" "+start+" "+ctx.number());
+		System.out.println("ADD "+start+" "+start+" "+visit(ctx.number()));
 		System.out.println("JMP "+count+"loop");
-		System.out.println("LBL "+count+"loopEND");
+		System.out.println("LBL "+count+"lpEND");
 		return null;
 	}
 

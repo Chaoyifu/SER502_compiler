@@ -8,4 +8,8 @@
 <fullyQualifiedTypeName name="org.antlr.v4.runtime.tree.TerminalNode"/>
 <fullyQualifiedTypeName name="org.antlr.v4.runtime.CommonTokenStream"/>
 <fullyQualifiedTypeName name="MNCParser.TermContext"/>
+<fullyQualifiedTypeName name="MNCParser.ElementContext"/>
+<fullyQualifiedTypeName name="MNCParser.InstatementContext"/>
+<fullyQualifiedTypeName name="MNCParser.PrintcallContext"/>
+<fullyQualifiedTypeName name="MNCParser.LoopparContext"/>
 </qualifiedTypeNameHistroy>

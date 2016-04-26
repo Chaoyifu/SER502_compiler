@@ -1,0 +1,11 @@
+function: dodo(in: number a[10] in:boolean b) 
+start
+end
+main
+start
+print: a[0]
+loop: (a) to (x[10]) with 1
+start
+end
+dodo(c,d)
+end

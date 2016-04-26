@@ -5,12 +5,12 @@ public class compilerMNC {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String inputstr = "function: dodo(in: number a[10] in:boolean b)\n"+ 
+		String inputstr ="main \n"+
 				"start \n"+
-				"end \n"+
-				"main \n"+
+				"loop: (a) to (x[10]) with 5 \n"+
 				"start \n"+
-				"a = 10 \n"+
+				"a = x+1\n"+
+				"end\n"+
 				"end\n";
 		ANTLRInputStream input = new ANTLRInputStream(inputstr);
 		MNCLexer lexer = new MNCLexer(input);
