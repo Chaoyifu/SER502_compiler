@@ -219,6 +219,18 @@ public class MNCBaseListener implements MNCListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLooppar(MNCParser.LoopparContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLooppar(MNCParser.LoopparContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFuncdeclaration(MNCParser.FuncdeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}

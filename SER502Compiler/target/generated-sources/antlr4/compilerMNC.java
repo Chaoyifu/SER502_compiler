@@ -5,13 +5,13 @@ public class compilerMNC {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String inputstr = "main \n" +
-							"start \n" +
-//							"number: a \n" +
-//							"boolean: _bcd \n" +
-//							"a = 10 \n"+
-//							"a = 10 + 20 + 30 * 100 / 50 \n"+
-							"end  \n \n";
+		String inputstr = "function: dodo(in: number a[10] in:boolean b)\n"+ 
+				"start \n"+
+				"end \n"+
+				"main \n"+
+				"start \n"+
+				"a = 10 \n"+
+				"end\n";
 		ANTLRInputStream input = new ANTLRInputStream(inputstr);
 		MNCLexer lexer = new MNCLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -26,6 +26,27 @@ public class compilerMNC {
 
 }
 
+/*
+ * "function: dodo(in: number a[10] in:boolean b)\n"+ 
+				"start\n"+
+				"end\n"+
+				"main\n"+
+				"start\n"+
+				"number : a\n"+
+				"number : b\n"+
+				"a = 10\n"+
+				"b = 20\n"+
+				"if (a > b)\n"+
+				"start\n"+
+				"a = 20\n"+
+				"end\n"+
+				"else\n"+
+				"start\n"+
+				"a = 30\n"+
+				"end\n"+ 
+				"dodo(c,d)"+
+				"end\n";
+ */
 
 /* Sample code : FunctionDeclaration and call
 main 

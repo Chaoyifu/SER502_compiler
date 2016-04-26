@@ -112,6 +112,12 @@ public interface MNCVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLoop(MNCParser.LoopContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MNCParser#looppar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLooppar(MNCParser.LoopparContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MNCParser#funcdeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

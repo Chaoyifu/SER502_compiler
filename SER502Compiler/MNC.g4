@@ -4,7 +4,7 @@
 grammar MNC;
 WS : [\t\r]+ -> skip ; // skip spaces, tabs, newlines
 
-program : (funcdeclaration EOL)* MAIN EOL body EOL (funcdeclaration EOL)*;
+program : ((funcdeclaration|arithmetic) EOL)* MAIN EOL body EOL ((funcdeclaration|arithmetic) EOL)*;
 
 body : START (EOL)+ statements END (EOL)*;
 
@@ -16,7 +16,7 @@ arithmetic : type COLON var;
 
 var : IDENTIFIER | array;
 
-array : IDENTIFIER ARRAYOPEN (DIGIT)+ ARRAYCLOSE;
+array : IDENTIFIER ARRAYOPEN ((DIGIT)+|IDENTIFIER) ARRAYCLOSE;
 
 type : NUM | BOOLT;
 
@@ -36,11 +36,13 @@ number : (DIGIT)+|(sign)(DIGIT)+ ;
 
 conditional : IF OPENPAR(boolcheck|var)CLOSEPAR(EOL body)(ELSE(EOL body))?;
 
-loop : LOOP OPENPAR(var|number)CLOSEPAR TO OPENPAR(var|number)CLOSEPAR WITH number EOL body;
+loop : LOOP OPENPAR(looppar)CLOSEPAR TO OPENPAR(looppar)CLOSEPAR WITH number EOL body;
+
+looppar: var|number;
 
 funcdeclaration : FUNCTION IDENTIFIER OPENPAR((instatement)* (outstatement)?) CLOSEPAR EOL body;
 
-instatement : IN type IDENTIFIER;
+instatement : IN type var;
 
 outstatement : OUT type IDENTIFIER;
 
