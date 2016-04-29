@@ -2,6 +2,7 @@
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+
 //import MNCParser.LoopparContext;
 
 
@@ -11,7 +12,6 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 	private int temp_count=0;
 	private int loop_count=0;
 	private int if_count=0;
-	private int else_count=0;
 
 	CommonTokenStream tokens;
 	public visitor2intermediateCode(CommonTokenStream tokens) {
@@ -148,7 +148,7 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 
 	@Override
 	public String visitArithmetic(MNCParser.ArithmeticContext ctx) {
-		String str="var "+visit(ctx.var())+" "+visit(ctx.type());
+		String str="var "+visit(ctx.type())+" "+visit(ctx.var());
 		System.out.println(str);
 		return null;
 	}
@@ -347,8 +347,21 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 		}
 		return null;
 	}
-	
-	
+
+	@Override
+	public String visitStartlooppar(MNCParser.StartloopparContext ctx) {
+		if(ctx.number()!=null){
+			int count=temp_count;
+			System.out.println("EQL "+count+"t "+visit(ctx.number()));
+			temp_count++;
+			return count+"t";
+		}
+		if(ctx.IDENTIFIER()!=null){
+			return ctx.IDENTIFIER().getText();
+		}
+		
+		return null;
+	}
 
 	@Override
 	public String visitLooppar(MNCParser.LoopparContext ctx) {
@@ -388,8 +401,8 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 		else{
 			str+="JGE ";
 		}
-		String start = visit(ctx.looppar(0));
-		String end = visit(ctx.looppar(1));
+		String start = visit(ctx.startlooppar());
+		String end = visit(ctx.looppar());
 		System.out.println("LBL "+count+"loop");
 		str+=count+"lpEND "+start+" "+end;
 		System.out.println(str);

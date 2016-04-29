@@ -135,6 +135,13 @@ public class MNCBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements MN
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitStartlooppar(MNCParser.StartloopparContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitLooppar(MNCParser.LoopparContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

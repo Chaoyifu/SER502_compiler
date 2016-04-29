@@ -36,7 +36,9 @@ number : (DIGIT)+|(sign)(DIGIT)+ ;
 
 conditional : IF OPENPAR(boolcheck|var)CLOSEPAR(EOL body)(ELSE(EOL body))?;
 
-loop : LOOP OPENPAR(looppar)CLOSEPAR TO OPENPAR(looppar)CLOSEPAR WITH number EOL body;
+loop : LOOP OPENPAR(startlooppar)CLOSEPAR TO OPENPAR(looppar)CLOSEPAR WITH number EOL body;
+
+startlooppar: IDENTIFIER|number;
 
 looppar: var|number;
 

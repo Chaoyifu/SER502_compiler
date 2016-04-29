@@ -6,12 +6,43 @@ public class compilerMNC {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String inputstr ="main \n"+
+				"start \n"
+				+ "number: a[5]\n"
+				+ "number: i\n"
+				+ "i=0\n"+
+				"loop: (i) to (5) with 1 \n"+
 				"start \n"+
-				"loop: (a) to (x[10]) with 5 \n"+
+				"a[i] = readInput\n"+
+				"end\n"+
+				"i=0\n"+
+				"loop: (i) to (5) with 1 \n"+
 				"start \n"+
-				"a = x+1\n"+
+				"print: a[i]\n"+
 				"end\n"+
 				"end\n";
+//		String inputstr = "function: factorial(in: number n out: number fact)"
+//				+ "\nstart"
+//				+ "\nif(n>1)"
+//				+ "\nstart"
+//				+ "\nnumber : temp"
+//				+ "\ntemp= n-1"
+//				+ "\nfactorial(temp, fact)"
+//				+ "\ntemp = n * fact"
+//				+ "\nfact = temp"
+//				+ "\nend"
+//				+ "\nelse"
+//				+ "\nstart"
+//				+ "\nfact = 1"
+//				+ "\nend"
+//				+ "\nend"
+//				+ "\nmain"
+//				+ "\nstart"
+//				+ "\nnumber : i"
+//				+ "\nnumber : result"
+//				+ "\ni = readInput"
+//				+ "\nfactorial(i, result)"
+//				+ "\nprint: result"
+//				+ "\nend\n";
 		ANTLRInputStream input = new ANTLRInputStream(inputstr);
 		MNCLexer lexer = new MNCLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -25,6 +56,34 @@ public class compilerMNC {
 	}
 
 }
+
+/*
+ * "function: factorial(in: number n out: number fact)"
+				+ "\nstart"
+				+ "\nif(n>1)"
+				+ "\nstart"
+				+ "\nnumber : temp"
+				+ "\ntemp= n-1"
+				+ "\nfactorial(temp, fact)"
+				+ "\ntemp = n * fact"
+				+ "\nfact = temp"
+				+ "\nend"
+				+ "\nelse"
+				+ "\nstart"
+				+ "\nfact = 1"
+				+ "\nend"
+				+ "\nend"
+				+ "\nmain"
+				+ "\nstart"
+				+ "\nnumber : i"
+				+ "\nnumber : result"
+				+ "\ni = readInput"
+				+ "\nfactorial(i, result)"
+				+ "\nprint: result"
+				+ "\nend\n"
+ */
+
+
 
 /*
  * "function: dodo(in: number a[10] in:boolean b)\n"+ 

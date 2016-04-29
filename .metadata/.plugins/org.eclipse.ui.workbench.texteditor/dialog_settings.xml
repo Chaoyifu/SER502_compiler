@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="visitLoop" key="selection"/>
+		<item value="loopEND" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="loopEND"/>
+			<item value="visitLo"/>
 			<item value="visitLoop"/>
+			<item value="visitCond"/>
+			<item value="visitCon"/>
+			<item value="else"/>
 			<item value="visitBoo"/>
 			<item value="count"/>
-			<item value="visitExp"/>
-			<item value="visitAss"/>
-			<item value="visitNum"/>
-			<item value="visitBool"/>
-			<item value="boolcheck"/>
 		</list>
 		<list key="replacehistory">
 			<item value="IN"/>

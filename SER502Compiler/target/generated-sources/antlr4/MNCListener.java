@@ -177,6 +177,16 @@ public interface MNCListener extends ParseTreeListener {
 	 */
 	void exitLoop(MNCParser.LoopContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MNCParser#startlooppar}.
+	 * @param ctx the parse tree
+	 */
+	void enterStartlooppar(MNCParser.StartloopparContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MNCParser#startlooppar}.
+	 * @param ctx the parse tree
+	 */
+	void exitStartlooppar(MNCParser.StartloopparContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MNCParser#looppar}.
 	 * @param ctx the parse tree
 	 */
