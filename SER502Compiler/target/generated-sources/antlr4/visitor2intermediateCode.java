@@ -148,7 +148,7 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 
 	@Override
 	public String visitArithmetic(MNCParser.ArithmeticContext ctx) {
-		String str="var "+visit(ctx.type())+" "+visit(ctx.var());
+		String str="VAR "+visit(ctx.type())+" "+visit(ctx.var());
 		System.out.println(str);
 		return null;
 	}
@@ -194,10 +194,10 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 	@Override
 	public String visitBool(MNCParser.BoolContext ctx) {
 		if (ctx.TRUE()!= null){
-			return "true";
+			return "True";
 		}
 		if (ctx.FALSE()!= null){
-			return "false";
+			return "False";
 		}
 		return null;
 	}
@@ -326,10 +326,10 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 				temp_count++;
 				str = "EAR "+tcount+"t "+visit(ctx.var());
 				System.out.println(str);
-				strCond = strCond + tcount+"t true";
+				strCond = strCond + tcount+"t True";
 			}
 			if((ctx.var()).IDENTIFIER()!=null){
-				strCond = strCond + (ctx.var()).IDENTIFIER().getText()+" true";
+				strCond = strCond + (ctx.var()).IDENTIFIER().getText()+" True";
 			}
 		}
 		System.out.println(strCond);
