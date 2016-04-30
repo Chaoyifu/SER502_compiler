@@ -1,0 +1,23 @@
+function: factorial(in: number n out: number fact)
+start
+if(n>1)
+start
+number : temp
+temp= n-1
+factorial(temp, fact)
+temp = n * fact
+fact = temp
+end
+else
+start
+fact = 1
+end
+end
+main
+start
+number : i
+number : result
+i = readInput
+factorial(i, result)
+print: result
+end

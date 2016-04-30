@@ -1,3 +1,15 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -5,54 +17,48 @@ public class compilerMNC {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String inputstr ="main \n"+
-				"start \n"
-				+ "number: a[5]\n"
-				+ "number: i\n"
-				+ "i=0\n"+
-				"loop: (i) to (5) with 1 \n"+
-				"start \n"+
-				"a[i] = readInput\n"+
-				"end\n"+
-				"i=0\n"+
-				"loop: (i) to (5) with 1 \n"+
-				"start \n"+
-				"print: a[i]\n"+
-				"end\n"+
-				"end\n";
-//		String inputstr = "function: factorial(in: number n out: number fact)"
-//				+ "\nstart"
-//				+ "\nif(n>1)"
-//				+ "\nstart"
-//				+ "\nnumber : temp"
-//				+ "\ntemp= n-1"
-//				+ "\nfactorial(temp, fact)"
-//				+ "\ntemp = n * fact"
-//				+ "\nfact = temp"
-//				+ "\nend"
-//				+ "\nelse"
-//				+ "\nstart"
-//				+ "\nfact = 1"
-//				+ "\nend"
-//				+ "\nend"
-//				+ "\nmain"
-//				+ "\nstart"
-//				+ "\nnumber : i"
-//				+ "\nnumber : result"
-//				+ "\ni = readInput"
-//				+ "\nfactorial(i, result)"
-//				+ "\nprint: result"
-//				+ "\nend\n";
+		if(args.length!=1){
+			System.out.println("Invalid file count");
+			return;
+		}
+		if(!(args[0].endsWith(".mnc"))){
+			System.out.println("Not a .mnc file");
+			return;
+		}
+		File f = new File(args[0]);
+		if(!f.exists()){
+			System.out.println("File not found");
+			return;
+		}
+		String outFileName = args[0]+"c";
+		String inputstr = "";
+		try{
+			FileReader fis = new FileReader(f);
+			BufferedReader bufferedReader = new BufferedReader(fis);
+			String line = "";
+			while((line = bufferedReader.readLine())!= null){
+				inputstr = inputstr+line+"\n";
+			}
+		}catch(IOException e){
+			System.out.println("Couldn't open the file");
+		}
 		ANTLRInputStream input = new ANTLRInputStream(inputstr);
 		MNCLexer lexer = new MNCLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 
 		MNCParser parser = new MNCParser(tokens);
         ParseTree tree = parser.program(); // begin parsing at rule 'r'
-        System.out.println(tree.toStringTree(parser)); 
-        visitor2intermediateCode visitor = new visitor2intermediateCode(tokens);
-        String res = visitor.visit(tree);
-        System.out.println(res);
+    	FileWriter fileWriter;
+		try {
+			fileWriter = new FileWriter(outFileName);
+	    	BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+	        visitor2intermediateCode visitor = new visitor2intermediateCode(bufferedWriter);
+	        visitor.visit(tree);
+	        bufferedWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error Generating compiler file");
+		}
 	}
 
 }

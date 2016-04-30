@@ -2,7 +2,7 @@
  * Define a grammar called Hello
  */
 grammar MNC;
-WS : [\t\r]+ -> skip ; // skip spaces, tabs, newlines
+WS : ('\t'|' ')+ -> skip ; // skip spaces, tabs, newlines
 
 program : ((funcdeclaration|arithmetic) EOL)* MAIN EOL body EOL ((funcdeclaration|arithmetic) EOL)*;
 
@@ -36,11 +36,9 @@ number : (DIGIT)+|(sign)(DIGIT)+ ;
 
 conditional : IF OPENPAR(boolcheck|var)CLOSEPAR(EOL body)(ELSE(EOL body))?;
 
-loop : LOOP OPENPAR(startlooppar)CLOSEPAR TO OPENPAR(looppar)CLOSEPAR WITH number EOL body;
+loop : LOOP OPENPAR(looppar)CLOSEPAR TO OPENPAR(looppar)CLOSEPAR WITH number EOL body;
 
-startlooppar: IDENTIFIER|number;
-
-looppar: var|number;
+looppar: IDENTIFIER|number;
 
 funcdeclaration : FUNCTION IDENTIFIER OPENPAR((instatement)* (outstatement)?) CLOSEPAR EOL body;
 
@@ -90,7 +88,7 @@ PRINT : 'print:';
 
 READ : 'readInput';
 
-EOL : '\n';
+EOL : '\n'|'\r';
 
 EQUALS : '=';
 

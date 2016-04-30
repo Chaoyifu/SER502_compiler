@@ -1,22 +1,23 @@
-//import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.CommonTokenStream;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
-
-//import MNCParser.LoopparContext;
-
-
 
 public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 	
 	private int temp_count=0;
 	private int loop_count=0;
 	private int if_count=0;
+	private BufferedWriter bufferedWriter;
 
-	CommonTokenStream tokens;
-	public visitor2intermediateCode(CommonTokenStream tokens) {
-		super();
-		this.tokens = tokens;
+//	CommonTokenStream tokens;
+//	public visitor2intermediateCode(CommonTokenStream tokens) {
+//		super();
+//		this.tokens = tokens;
+//	}
+
+	public visitor2intermediateCode(BufferedWriter fWriter) {
+		// TODO Auto-generated constructor stub
+            bufferedWriter = fWriter;
 	}
 
 	@Override
@@ -99,11 +100,18 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 		for(int i=0;i<ctx.funcdeclaration().size();i++){
 			visit(ctx.funcdeclaration(i));
 		}
-		System.out.println("SRT");
-		if (ctx.body()!= null){
-			visit(ctx.body());
+		try {
+			bufferedWriter.write("SRT\n");
+			if (ctx.body()!= null){
+				visit(ctx.body());
+			}
+			bufferedWriter.write("HLT\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error Generating compiler file ");
+			
+			System.exit(0);
 		}
-		System.out.println("HLT");
 		return "";
 	}
 
@@ -149,7 +157,12 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 	@Override
 	public String visitArithmetic(MNCParser.ArithmeticContext ctx) {
 		String str="VAR "+visit(ctx.type())+" "+visit(ctx.var());
-		System.out.println(str);
+		try {
+			bufferedWriter.write(str+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		return null;
 	}
 	
@@ -217,7 +230,13 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 		if (ctx.READ()!= null){
 			str = str + " $IN";
 		}
-		System.out.println(str);
+		try {
+			bufferedWriter.write(str+"\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		return null;
 	}
 
@@ -237,7 +256,13 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 				str="SUB ";
 			}
 			str = str+count+"t "+visit(ctx.term())+" "+visit(ctx.expr());
-			System.out.println(str);
+			try {
+				bufferedWriter.write(str+"\n");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 			return ""+count+"t";
 		}
 	}
@@ -258,7 +283,12 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 				str = "DIV ";
 			}
 			str = str+count+"t "+visit(ctx.factor())+" "+visit(ctx.term());
-			System.out.println(str);
+			try {
+				bufferedWriter.write(str+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 			return ""+count+"t";
 		}
 	}
@@ -281,7 +311,12 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 				int count = temp_count;
 				String str = "EAR "+count+"t "+visit(ctx.var());
 				temp_count++;
-				System.out.println(str);
+				try {
+					bufferedWriter.write(str+"\n");
+				} catch (IOException e) {
+					System.out.println("Error Generating compiler file");
+					System.exit(0);
+				}
 				return ""+count+"t";
 			}
 			if((ctx.var()).IDENTIFIER()!=null){
@@ -325,62 +360,66 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 				int tcount = temp_count;
 				temp_count++;
 				str = "EAR "+tcount+"t "+visit(ctx.var());
-				System.out.println(str);
+				try {
+					bufferedWriter.write(str+"\n");
+				} catch (IOException e) {
+					System.out.println("Error Generating compiler file");
+					System.exit(0);
+				}
 				strCond = strCond + tcount+"t True";
 			}
 			if((ctx.var()).IDENTIFIER()!=null){
 				strCond = strCond + (ctx.var()).IDENTIFIER().getText()+" True";
 			}
 		}
-		System.out.println(strCond);
+		try {
+			bufferedWriter.write(strCond+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		visit(ctx.body(0));
 		if(ctx.ELSE()!=null){
-			System.out.println("JMP "+count +"ifel");
-			System.out.println("LBL "+count+"if");
+			try {
+				bufferedWriter.write("JMP "+count +"ifel"+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
+			try {
+				bufferedWriter.write("LBL "+count+"if"+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 			if(ctx.body(1)!=null){
 				visit(ctx.body(1));
 			}
-			System.out.println("LBL "+count+"ifel");
+			try {
+				bufferedWriter.write("LBL "+count+"ifel"+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		}
 		else{
-			System.out.println("LBL "+count+"if");
+			try {
+				bufferedWriter.write("LBL "+count+"if"+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		}
-		return null;
-	}
-
-	@Override
-	public String visitStartlooppar(MNCParser.StartloopparContext ctx) {
-		if(ctx.number()!=null){
-			int count=temp_count;
-			System.out.println("EQL "+count+"t "+visit(ctx.number()));
-			temp_count++;
-			return count+"t";
-		}
-		if(ctx.IDENTIFIER()!=null){
-			return ctx.IDENTIFIER().getText();
-		}
-		
 		return null;
 	}
 
 	@Override
 	public String visitLooppar(MNCParser.LoopparContext ctx) {
 		if(ctx.number()!=null){
-			int count=temp_count;
-			System.out.println("EQL "+count+"t "+visit(ctx.number()));
-			temp_count++;
-			return count+"t";
+			return visit(ctx.number());
 		}
-		if(ctx.var()!=null){
-			int count=temp_count;
-			if(ctx.var().array()!=null){
-				System.out.println("EAR "+count+"t "+ visit(ctx.var()));
-				temp_count++;
-				return count+"t";
-			}
-			if(ctx.var().IDENTIFIER()!=null){
-				return ctx.var().IDENTIFIER().getText();
-			}
+		if(ctx.IDENTIFIER()!=null){
+			return ctx.IDENTIFIER().getText();
 		}
 		return "";
 	}
@@ -401,15 +440,40 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 		else{
 			str+="JGE ";
 		}
-		String start = visit(ctx.startlooppar());
-		String end = visit(ctx.looppar());
-		System.out.println("LBL "+count+"loop");
+		String start = visit(ctx.looppar(0));
+		String end = visit(ctx.looppar(1));
+		try {
+			bufferedWriter.write("LBL "+count+"loop"+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		str+=count+"lpEND "+start+" "+end;
-		System.out.println(str);
+		try {
+			bufferedWriter.write(str+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		visit(ctx.body());
-		System.out.println("ADD "+start+" "+start+" "+visit(ctx.number()));
-		System.out.println("JMP "+count+"loop");
-		System.out.println("LBL "+count+"lpEND");
+		try {
+			bufferedWriter.write("ADD "+start+" "+start+" "+visit(ctx.number())+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
+		try {
+			bufferedWriter.write("JMP "+count+"loop"+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
+		try {
+			bufferedWriter.write("LBL "+count+"lpEND"+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		return null;
 	}
 
@@ -423,16 +487,36 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 			 outpar = visit(ctx.outstatement());
 			outcount = 1;
 		}
-		System.out.println("LBL "+ funcname+ " "+ ctx.instatement().size()+" "+ outcount);
+		try {
+			bufferedWriter.write("LBL "+ funcname+ " "+ ctx.instatement().size()+" "+ outcount+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		for(int i=0;i<ctx.instatement().size();i++){
 			String inpar = visit(ctx.instatement(i));
-			System.out.println("IPT "+ inpar);
+			try {
+				bufferedWriter.write("IPT "+ inpar+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		}
 		if(ctx.outstatement()!=null){
-			System.out.println("OPT "+ outpar);
+			try {
+				bufferedWriter.write("OPT "+ outpar+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		} 
 		visit(ctx.body());
-		System.out.println("LBL "+funcname+"END"); 
+		try {
+			bufferedWriter.write("LBL "+funcname+"END"+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		return null;
 	}
 
@@ -457,13 +541,28 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 	@Override
 	public String visitPrintcall(MNCParser.PrintcallContext ctx) {
 		if(ctx.var()!=null){
-			System.out.println("OUT var "+visit(ctx.var()));
+			try {
+				bufferedWriter.write("OUT var "+visit(ctx.var())+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		}
 		if(ctx.bool()!=null){
-			System.out.println("OUT val "+visit(ctx.bool()));
+			try {
+				bufferedWriter.write("OUT val "+visit(ctx.bool())+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		}
 		if(ctx.number()!=null){
-			System.out.println("OUT val "+visit(ctx.number()));
+			try {
+				bufferedWriter.write("OUT val "+visit(ctx.number())+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		}
 		return null;
 	}
@@ -471,9 +570,19 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 	@Override
 	public String visitFunctioncall(MNCParser.FunctioncallContext ctx) {
 		for(int i=0;i<ctx.var().size();i++){
-			System.out.println("PAR "+visit(ctx.var(i)));
+			try {
+				bufferedWriter.write("PAR "+visit(ctx.var(i))+"\n");
+			} catch (IOException e) {
+				System.out.println("Error Generating compiler file");
+				System.exit(0);
+			}
 		}
-		System.out.println("JMP "+ctx.IDENTIFIER().getText());
+		try {
+			bufferedWriter.write("JMP "+ctx.IDENTIFIER().getText()+"\n");
+		} catch (IOException e) {
+			System.out.println("Error Generating compiler file");
+			System.exit(0);
+		}
 		return null;
 	}
 

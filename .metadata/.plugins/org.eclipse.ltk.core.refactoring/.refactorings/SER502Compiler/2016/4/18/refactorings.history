@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;try.mnc&apos; to &apos;SER502Compiler&apos;" description="Move &apos;try.mnc&apos; to &apos;SER502Compiler&apos;" destination="/SER502Compiler" element1="target/generated-sources/antlr4/try.mnc" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1461973401293" updateReferences="true"/>
+</session>

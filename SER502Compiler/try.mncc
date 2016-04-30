@@ -1,0 +1,27 @@
+LBL factorial 1 1
+IPT NUM n -1
+OPT NUM fact -1
+JLE 0if n 1
+VAR NUM temp -1
+SUB 0t n 1
+EQL temp 0t
+PAR temp -1
+PAR fact -1
+JMP factorial
+MUL 1t n fact
+EQL temp 1t
+EQL fact temp
+JMP 0ifel
+LBL 0if
+EQL fact 1
+LBL 0ifel
+LBL factorialEND
+SRT
+VAR NUM i -1
+VAR NUM result -1
+EQL i $IN
+PAR i -1
+PAR result -1
+JMP factorial
+OUT var result -1
+HLT
