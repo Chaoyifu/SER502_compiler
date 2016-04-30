@@ -1,5 +1,6 @@
 import SymbolTable
 import copy
+import sys
 
 golSt = {}
 funcSt = {}
@@ -753,7 +754,8 @@ def loopFunc(op,St):
                 exit()
         elif temp[0] == 'JMP' and temp[1] == op[1]:
             destroySymbol(St,varList)
-            varList.clear()
+            while(len(varList) != 0):
+                varList.pop()
             execute(code[currentLine],St)
             continue
         else:
@@ -935,5 +937,5 @@ def executefunc(funcName, St):
             exit()
         currentLine += 1
 
-functionReadFile("Factorial.txt")
+functionReadFile(sys.argv[1])
 process(code)
