@@ -114,16 +114,19 @@ def process(code):
     preprocess(code)
     locSt = {}
     global currentLine
-    while(code[currentLine] !="HLT"):
-        temp = code[currentLine].split(' ')
-        if temp[0] == 'VAR' and temp[1] not in locSt:
-            execute(code[currentLine], locSt)
-        elif temp[0] != 'VAR':
-            execute(code[currentLine], locSt)
-        else:
-            print("Error: redefine variable " + temp[1])
-            exit()
-        currentLine += 1
+    try:
+        while(currentLine < len(code)):
+            temp = code[currentLine].split(' ')
+            if temp[0] == 'VAR' and temp[1] not in locSt:
+                execute(code[currentLine], locSt)
+            elif temp[0] != 'VAR':
+                execute(code[currentLine], locSt)
+            else:
+                print("Error: redefine variable " + temp[1])
+                exit()
+            currentLine += 1
+    except NameError:
+        exit()
 
 def execute(command,St):
     if command == "":
@@ -151,6 +154,8 @@ def execute(command,St):
         condJump(op,St)
     if op[0] == "JMP" and is_number(op[1][0]) and "loop" in op[1]:
         unconJump(op,St)
+    if op[0] == "HLT":
+        return
 
 def println(op,St):
     index = -1
@@ -930,5 +935,5 @@ def executefunc(funcName, St):
             exit()
         currentLine += 1
 
-functionReadFile("IfWithinLoop.txt")
+functionReadFile("Factorial.txt")
 process(code)
