@@ -442,18 +442,9 @@ public class visitor2intermediateCode extends MNCBaseVisitor<String>{
 		}
 		String start = "";
 		if(ctx.looppar(0).number()!=null){
-			try {
-				start = temp_count+"t ";
-				temp_count++;
-				bufferedWriter.write("EQL "+start+visit(ctx.looppar(0))+"\n");
-			} catch (IOException e) {
-				System.out.println("Error Generating compiler file");
-				System.exit(0);
-			}
 			
-		}else{
-			start = visit(ctx.looppar(0));
 		}
+		String start = visit(ctx.looppar(0));
 		String end = visit(ctx.looppar(1));
 		try {
 			bufferedWriter.write("LBL "+count+"loop"+"\n");
